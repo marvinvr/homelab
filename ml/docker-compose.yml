@@ -34,7 +34,8 @@ services:
       - "traefik.http.routers.ollama.entrypoints=web"
       - "traefik.http.routers.ollama.rule=Host(`ollama.mvr.io`)"
       - "traefik.http.services.ollama.loadbalancer.server.port=11434"
-      
+    runtime: nvidia
+
 networks:
   mvr-hl:
     name: mvr-hl
