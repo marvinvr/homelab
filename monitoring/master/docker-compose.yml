@@ -29,6 +29,16 @@ services:
       - "traefik.http.routers.beszel.rule=Host(`status.mvr.io`)"
       - "traefik.http.services.beszel.loadbalancer.server.port=8090"
 
+  cloudflare-tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflare-tunnel
+    restart: unless-stopped
+    environment:
+      - CLOUDFLARE_TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN:?CLOUDFLARE_TUNNEL_TOKEN is not set}
+    networks:
+      - mvr-hl
+    command: tunnel --no-autoupdate run --token $CLOUDFLARE_TUNNEL_TOKEN
+  
   ddns-updater:
     image: qmcgaw/ddns-updater:latest
     container_name: ddns-updater
