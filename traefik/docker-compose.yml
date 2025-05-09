@@ -12,4 +12,5 @@ services:
 
 networks:
   mvr-hl:
+    name: mvr-hl
     external: false 
