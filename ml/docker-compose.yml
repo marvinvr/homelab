@@ -1,3 +1,37 @@
 services:
   immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:release-cuda
+    container_name: immich-machine-learning
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    ports:
+      - 3003:3003
+    volumes:
+      - /cache
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.immich-machine-learning.entrypoints=web"
+      - "traefik.http.routers.immich-machine-learning.rule=Host(`immich-ml.mvr.io`)"
+      - "traefik.http.services.immich-machine-learning.loadbalancer.server.port=3003"
+    runtime: nvidia
+      
   ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    ports:
+      - 11434:11434
+    environment:
+      - OLLAMA_KEEP_ALIVE=20m
+      - OLLAMA_MAX_LOADED_MODELS=3
+    volumes:
+      - /root/.ollama
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ollama.entrypoints=web"
+      - "traefik.http.routers.ollama.rule=Host(`ollama.mvr.io`)"
+      - "traefik.http.services.ollama.loadbalancer.server.port=11434"
+      
