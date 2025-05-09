@@ -1,7 +1,15 @@
 services:
   traefik:
-    image: traefik:alpine
+    image: traefik:v3.4
+    container_name: traefik
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    ports:
+      - 80:80
+      - 443:443
+
 
 networks:
   mvr-hl:
-    external: true 
+    external: false 
