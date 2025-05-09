@@ -8,8 +8,9 @@ services:
     ports:
       - 8090:8090
     volumes:
-      - /opt/apps/beszel:/beszel_data
+      - ${DATA_DIR:-/opt/apps}/beszel:/beszel_data
     labels:
+      - "traefik.enable=true"
       - "traefik.http.routers.beszel.entrypoints=web"
       - "traefik.http.routers.beszel.rule=Host(`stats.mvr.io`)"
       - "traefik.http.services.beszel.loadbalancer.server.port=8090"
@@ -23,7 +24,7 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - /opt/apps/uptime-kuma:/app/data
+      - ${DATA_DIR:-/opt/apps}/uptime-kuma:/app/data
   ddns-updater:
     image: qmcgaw/ddns-updater:latest
     container_name: ddns-updater
@@ -33,7 +34,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - /opt/apps/ddns-updater:/updater/data
+      - ${DATA_DIR:-/opt/apps}/ddns-updater:/updater/data
 
 networks:
   mvr-hl:

@@ -16,3 +16,6 @@
 nohup.out
 
 .env
+
+appdata/*
+**/appdata/*
