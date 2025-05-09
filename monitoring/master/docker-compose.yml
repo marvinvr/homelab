@@ -1,0 +1,36 @@
+include:
+  - ../base.yml
+
+services:
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    ports:
+      - 8090:8090
+    volumes:
+      - /opt/apps/beszel:/beszel_data
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    ports:
+      - 3000:3000
+    volumes:
+      - /opt/apps/uptime-kuma:/app/data
+
+  ddns-updater:
+    image: qmcgaw/ddns-updater:latest
+    container_name: ddns-updater
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    ports:
+      - 8000:8000
+    volumes:
+      - /opt/apps/ddns-updater:/updater/data

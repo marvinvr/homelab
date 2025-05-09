@@ -1,0 +1,6 @@
+include:
+  - ../base.yml
+
+services:
+  traefik:
+    image: traefik:alpine

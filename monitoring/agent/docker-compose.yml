@@ -1,0 +1,22 @@
+services:
+  watchtower:
+    image: containrrr/watchtower:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TZ=Europe/Zurich
+      - WATCHTOWER_NOTIFICATIONS_LEVEL=warn
+      - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_NOTIFICATION_URL}
+      - WATCHTOWER_SCHEDULE=0 45 5 * * *
+
+  beszel-agent:
+    image: henrygd/beszel-agent:latest
+    restart: unless-stopped
+    environment:
+      - KEY=${BESZEL_KEY:?Beszel key is not set}
+      - PORT=45876
+    ports:
+      - 45876:45876
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro

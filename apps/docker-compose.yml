@@ -1,0 +1,12 @@
+include:
+  - ../base.yml
+
+services:
+  changedetection:
+  nebula-sync:
+  ombi:
+  open-webui:
+  tautulli:
+  truenas-auto-update:
+  unsend:
+  
