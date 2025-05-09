@@ -1,6 +1,7 @@
-include:
-  - ../base.yml
-
 services:
   traefik:
     image: traefik:alpine
+
+networks:
+  mvr-hl:
+    external: true 

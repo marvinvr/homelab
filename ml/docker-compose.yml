@@ -1,6 +1,3 @@
-include:
-  - ../base.yml
-
 services:
   immich-machine-learning:
   ollama:

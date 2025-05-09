@@ -1,6 +1,3 @@
-include:
-  - ../base.yml
-
 services:
   beszel:
     image: henrygd/beszel:latest
@@ -34,3 +31,7 @@ services:
       - 8000:8000
     volumes:
       - /opt/apps/ddns-updater:/updater/data
+
+networks:
+  mvr-hl:
+    external: true 

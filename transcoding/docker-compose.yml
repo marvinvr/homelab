@@ -1,5 +1,7 @@
-include:
-  - ../base.yml
-
 services:
   unmanic:
+
+
+networks:
+  mvr-hl:
+    external: true 
