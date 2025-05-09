@@ -2,6 +2,7 @@ services:
   watchtower:
     image: containrrr/watchtower:latest
     restart: unless-stopped
+    container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
@@ -13,6 +14,7 @@ services:
   beszel-agent:
     image: henrygd/beszel-agent:latest
     restart: unless-stopped
+    container_name: beszel-agent
     environment:
       - KEY=${BESZEL_KEY:?Beszel key is not set}
       - PORT=45876
