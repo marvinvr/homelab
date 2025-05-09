@@ -35,3 +35,7 @@ services:
       - "traefik.http.routers.ollama.rule=Host(`ollama.mvr.io`)"
       - "traefik.http.services.ollama.loadbalancer.server.port=11434"
       
+networks:
+  mvr-hl:
+    name: mvr-hl
+    external: true 
