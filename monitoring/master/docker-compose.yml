@@ -24,10 +24,6 @@ services:
       - 3001:3001
     volumes:
       - /opt/apps/uptime-kuma:/app/data
-    labels:
-      - "traefik.http.routers.beszel.entrypoints=web"
-      - "traefik.http.routers.beszel.rule=Host(`status.mvr.io`)"
-      - "traefik.http.services.beszel.loadbalancer.server.port=8090"
   ddns-updater:
     image: qmcgaw/ddns-updater:latest
     container_name: ddns-updater
