@@ -41,10 +41,10 @@ services:
     restart: unless-stopped
     volumes:
       - /opt/apps/stirling-pdf/configs:/configs
+      - /opt/apps/stirling-pdf/pipeline:/pipeline
       - /usr/share/tessdata # Required for extra OCR languages
       - /customFiles
       - /logs
-      - /pipeline
     environment:
       - DOCKER_ENABLE_SECURITY=false
       - LANGS=en_GB
