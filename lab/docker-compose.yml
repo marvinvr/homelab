@@ -1,4 +1,8 @@
 services:
+
+  #
+  # Utilities
+  #
   myspeed:
     image: germannewsmaker/myspeed:latest
     container_name: myspeed
@@ -14,7 +18,20 @@ services:
       - "traefik.http.routers.myspeed.entrypoints=web"
       - "traefik.http.routers.myspeed.rule=Host(`speedtest.mvr.io`)"
       - "traefik.http.services.myspeed.loadbalancer.server.port=5216"
-
+  
+  convertx: 
+    image: ghcr.io/c4illin/convertx:latest
+    container_name: convertx
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - /opt/apps/convertx:/app/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.convertx.entrypoints=web"
+      - "traefik.http.routers.convertx.rule=Host(`convert.mvr.io`)"
+      - "traefik.http.services.convertx.loadbalancer.server.port=3000"
 #  changedetection:
 #  nebula-sync:
 #  ombi:
