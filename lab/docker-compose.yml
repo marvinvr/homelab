@@ -11,8 +11,6 @@ services:
       - mvr-hl
     volumes:
       - /opt/apps/myspeed:/myspeed/data
-    ports:
-      - 5216:5216
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.myspeed.entrypoints=web"
@@ -23,8 +21,6 @@ services:
     image: ghcr.io/c4illin/convertx:latest
     container_name: convertx
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     volumes:
       - /opt/apps/convertx:/app/data
     environment:
@@ -37,6 +33,27 @@ services:
       - "traefik.http.routers.convertx.entrypoints=web"
       - "traefik.http.routers.convertx.rule=Host(`convert.mvr.io`)"
       - "traefik.http.services.convertx.loadbalancer.server.port=3000"
+
+
+  stirling-pdf:
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    volumes:
+      - /opt/apps/stirling-pdf/configs:/configs
+      - stirling-pdf/training-data:/usr/share/tessdata # Required for extra OCR languages
+      - stirling-pdf/custom-files:/customFiles/
+      - stirling-pdf/logs:/logs/
+      - stirling-pdf/pipeline:/pipeline/
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - LANGS=en_GB
+    networks:
+      - mvr-hl
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.stirling-pdf.entrypoints=web"
+      - "traefik.http.routers.stirling-pdf.rule=Host(`pdf.mvr.io`)"
+      - "traefik.http.services.stirling-pdf.loadbalancer.server.port=8080"
+
 #  changedetection:
 #  nebula-sync:
 #  ombi:
