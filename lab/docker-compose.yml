@@ -30,14 +30,13 @@ services:
     environment:
       - ALLOW_UNAUTHENTICATED=true
       - HTTP_ALLOWED=true
+    networks:
+      - mvr-hl
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.convertx.entrypoints=web"
       - "traefik.http.routers.convertx.rule=Host(`convert.mvr.io`)"
       - "traefik.http.services.convertx.loadbalancer.server.port=3000"
-      - "traefik.http.middlewares.convertx-headers.headers.customrequestheaders.X-Forwarded-Proto=http"
-      - "traefik.http.middlewares.convertx-headers.headers.customrequestheaders.X-Forwarded-Host=convert.mvr.io"
-      - "traefik.http.routers.convertx.middlewares=convertx-headers"
 #  changedetection:
 #  nebula-sync:
 #  ombi:
