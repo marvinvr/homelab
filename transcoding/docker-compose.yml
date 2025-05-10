@@ -1,6 +1,26 @@
 services:
   unmanic:
-
+    image: josh5/unmanic:latest
+    container_name: unmanic
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    ports:
+      - 8888:8888
+    volumes:
+      - /opt/apps/unmanic:/config
+      - /mnt/media:/library
+      - /tmp/unimanic:/tmp/unimanic
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.unmanic.entrypoints=web"
+      - "traefik.http.routers.unmanic.rule=Host(`unmanic.mvr.io`)"
+      - "traefik.http.services.unmanic.loadbalancer.server.port=8888"
+    runtime: nvidia
 
 networks:
   mvr-hl:
