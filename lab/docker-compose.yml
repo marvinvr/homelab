@@ -27,6 +27,9 @@ services:
       - "3000:3000"
     volumes:
       - /opt/apps/convertx:/app/data
+    environment:
+      - ALLOW_UNAUTHENTICATED=true
+      - HTTP_ALLOWED=true
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.convertx.entrypoints=web"
