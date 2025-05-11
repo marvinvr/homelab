@@ -69,20 +69,32 @@ services:
       - "traefik.http.routers.changedetection.rule=Host(`changedetection.mvr.io`)"
       - "traefik.http.services.changedetection.loadbalancer.server.port=5000"
 
+  #
+  # HomeLab
+  #
   nebula-sync:
     image: ghcr.io/lovelaze/nebula-sync:latest
     container_name: nebula-sync
     restart: unless-stopped
-    networks:
-      - mvr-hl
     environment:
       - PRIMARY=${NEBULA_SYNC_PRIMARY:?Primary host is required}
       - REPLICAS=${NEBULA_SYNC_REPLICAS:?Replicas are required}
       - FULL_SYNC=true
       - RUN_GRAVITY=false
       - CRON=35 * * * *
+  
+  truenas-auto-update:
+    image: ghcr.io/marvinvr/truenas-auto-update:latest
+    container_name: truenas-auto-update
+    restart: unless-stopped
+    environment:
+      - BASE_URL=${TRUENAS_BASE_URL:?Base URL is required}
+      - API_KEY=${TRUENAS_API_KEY:?API key is required}
+      - APPRISE_URLS=${TRUENAS_APPRISE_URLS:-}
+      - CRON_SCHEDULE=0 4 * * *
+      - NOTIFY_ON_SUCCESS=false
 
-#  nebula-sync:
+
 #  ombi:
 #  truenas-auto-update:
 #  open-webui:
