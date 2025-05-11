@@ -77,8 +77,8 @@ services:
     container_name: nebula-sync
     restart: unless-stopped
     environment:
-      - PRIMARY=${NEBULA_SYNC_PRIMARY:?Primary host is required}
-      - REPLICAS=${NEBULA_SYNC_REPLICAS:?Replicas are required}
+      - PRIMARY=${NEBULA_SYNC_PRIMARY}
+      - REPLICAS=${NEBULA_SYNC_REPLICAS}
       - FULL_SYNC=true
       - RUN_GRAVITY=false
       - CRON=35 * * * *
@@ -88,9 +88,9 @@ services:
     container_name: truenas-auto-update
     restart: unless-stopped
     environment:
-      - BASE_URL=${TRUENAS_BASE_URL:?Base URL is required}
-      - API_KEY=${TRUENAS_API_KEY:?API key is required}
-      - APPRISE_URLS=${TRUENAS_APPRISE_URLS:-}
+      - BASE_URL=${TRUENAS_BASE_URL}
+      - API_KEY=${TRUENAS_API_KEY}
+      - APPRISE_URLS=${TRUENAS_APPRISE_URLS}
       - CRON_SCHEDULE=0 4 * * *
       - NOTIFY_ON_SUCCESS=false
 
@@ -112,9 +112,6 @@ services:
       - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
 
 #  ombi:
-#  truenas-auto-update:
-#  open-webui:
-  
 
 networks:
   mvr-hl:
