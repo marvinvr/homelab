@@ -94,6 +94,22 @@ services:
       - CRON_SCHEDULE=0 4 * * *
       - NOTIFY_ON_SUCCESS=false
 
+  #
+  # AI
+  #
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/open-webui:/app/backend/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.open-webui.entrypoints=web"
+      - "traefik.http.routers.open-webui.rule=Host(`chat.mvr.io`)"
+      - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
 
 #  ombi:
 #  truenas-auto-update:
