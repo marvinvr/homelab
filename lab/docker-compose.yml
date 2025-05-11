@@ -55,7 +55,20 @@ services:
       - "traefik.http.routers.stirling-pdf.rule=Host(`pdf.mvr.io`)"
       - "traefik.http.services.stirling-pdf.loadbalancer.server.port=8080"
 
-#  changedetection:
+  changedetection: 
+    image: dgtlmoon/changedetection.io:latest
+    container_name: changedetection
+    restart: unless-stopped
+    volumes:
+      - /opt/apps/changedetection:/datastore
+    networks:
+      - mvr-hl
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.changedetection.entrypoints=web"
+      - "traefik.http.routers.changedetection.rule=Host(`changedetection.mvr.io`)"
+      - "traefik.http.services.changedetection.loadbalancer.server.port=5000"
+
 #  nebula-sync:
 #  ombi:
 #  open-webui:
