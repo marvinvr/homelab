@@ -9,6 +9,7 @@ services:
       - TZ=Europe/Zurich
       - WATCHTOWER_NOTIFICATIONS_LEVEL=warn
       - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_NOTIFICATION_URL}
+      - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_SCHEDULE=0 45 5 * * *
 
   beszel-agent:
