@@ -10,7 +10,7 @@ services:
     networks:
       - mvr-hl
     volumes:
-      - /opt/apps/myspeed:/myspeed/data
+      - ${DATA_DIR:-/opt/apps}/myspeed:/myspeed/data
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.myspeed.entrypoints=web"
@@ -22,7 +22,7 @@ services:
     container_name: convertx
     restart: unless-stopped
     volumes:
-      - /opt/apps/convertx:/app/data
+      - ${DATA_DIR:-/opt/apps}/convertx:/app/data
     environment:
       - ALLOW_UNAUTHENTICATED=true
       - HTTP_ALLOWED=true
@@ -39,8 +39,8 @@ services:
     container_name: stirling-pdf
     restart: unless-stopped
     volumes:
-      - /opt/apps/stirling-pdf/configs:/configs
-      - /opt/apps/stirling-pdf/pipeline:/pipeline
+      - ${DATA_DIR:-/opt/apps}/stirling-pdf/configs:/configs
+      - ${DATA_DIR:-/opt/apps}/stirling-pdf/pipeline:/pipeline
       - /usr/share/tessdata # Required for extra OCR languages
       - /customFiles
       - /logs
@@ -60,7 +60,7 @@ services:
     container_name: changedetection
     restart: unless-stopped
     volumes:
-      - /opt/apps/changedetection:/datastore
+      - ${DATA_DIR:-/opt/apps}/changedetection:/datastore
     networks:
       - mvr-hl
     labels:
@@ -69,12 +69,23 @@ services:
       - "traefik.http.routers.changedetection.rule=Host(`changedetection.mvr.io`)"
       - "traefik.http.services.changedetection.loadbalancer.server.port=5000"
 
+  nebula-sync:
+    image: ghcr.io/lovelaze/nebula-sync:latest
+    container_name: nebula-sync
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    environment:
+      - PRIMARY=${NEBULA_SYNC_PRIMARY:?Primary host is required}
+      - REPLICAS=${NEBULA_SYNC_REPLICAS:?Replicas are required}
+      - FULL_SYNC=true
+      - RUN_GRAVITY=false
+      - CRON=35 * * * *
+
 #  nebula-sync:
 #  ombi:
-#  open-webui:
-#  tautulli:
 #  truenas-auto-update:
-#  unsend:
+#  open-webui:
   
 
 networks:
