@@ -30,3 +30,6 @@ networks:
 
 volumes:
   plex-logs:
+  plex-cache:
+  plex-metadata:
+  plex-media: 
