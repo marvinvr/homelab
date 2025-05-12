@@ -11,7 +11,7 @@ services:
     devices:
       - /dev/dri:/dev/dri
     volumes:
-      - ${DATA_DIR:-/opt/apps}/plex/config:/config
+      - ${DATA_DIR:-/opt/apps}/plex:/config
       - /mnt/temp/plex:/transcode
       - /mnt/media:/data
       - plex-logs:/config/Library/Application\ Support/Plex\ Media\ Server/Logs
