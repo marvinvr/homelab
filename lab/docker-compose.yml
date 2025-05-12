@@ -90,7 +90,7 @@ services:
     networks:
       - mvr-hl
     ports:
-      - 9002:3000
+      - 10002:3000
 
   karakeep-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:123
@@ -154,7 +154,7 @@ services:
     volumes:
       - ${DATA_DIR:-/opt/apps}/open-webui:/app/backend/data
     ports:
-      - 9001:8080
+      - 10001:8080
 
 networks:
   mvr-hl:
