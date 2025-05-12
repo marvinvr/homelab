@@ -110,6 +110,9 @@ services:
       - "traefik.http.routers.open-webui.entrypoints=web"
       - "traefik.http.routers.open-webui.rule=Host(`chat.mvr.io`)"
       - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.open-webui-chat.entrypoints=web"
+      - "traefik.http.routers.open-webui-chat.rule=Host(`chat.mvr.bz`)"
+      - "traefik.http.services.open-webui-chat.loadbalancer.server.port=8080"
 
 #  ombi:
 
