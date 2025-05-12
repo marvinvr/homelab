@@ -92,7 +92,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.karakeep.entrypoints=web"
-      - "traefik.http.routers.karakeep.rule=Host(`keep.mvr.io`)"
+      - "traefik.http.routers.karakeep.rule=Host(`keep.mvr.bz`)"
       - "traefik.http.services.karakeep.loadbalancer.server.port=3000"
   karakeep-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:123
