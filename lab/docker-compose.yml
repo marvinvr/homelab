@@ -89,11 +89,9 @@ services:
       DATA_DIR: /data # DON'T CHANGE THIS
     networks:
       - mvr-hl
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.karakeep.entrypoints=web"
-      - "traefik.http.routers.karakeep.rule=Host(`keep.mvr.bz`)"
-      - "traefik.http.services.karakeep.loadbalancer.server.port=3000"
+    ports:
+      - 9002:3000
+
   karakeep-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:123
     container_name: karakeep-chrome
@@ -155,11 +153,8 @@ services:
       - mvr-hl
     volumes:
       - ${DATA_DIR:-/opt/apps}/open-webui:/app/backend/data
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.open-webui.entrypoints=web"
-      - "traefik.http.routers.open-webui.rule=Host(`chat.mvr.bz`)"
-      - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
+    ports:
+      - 9001:8080
 
 networks:
   mvr-hl:
