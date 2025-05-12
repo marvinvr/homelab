@@ -1,0 +1,32 @@
+services:
+  plex:
+    image: plexinc/pms-docker:1.41.6.9685-d301f511a
+    container_name: plex
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    environment:
+      - PLEX_UID=1000
+      - PLEX_GID=1000
+      - TZ=Europe/Zurich
+      - HOME=/config
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/plex/config:/config
+      - /mnt/temp/plex:/transcode
+      - /mnt/media:/data
+      - plex-logs:/config/Library/Application\ Support/Plex\ Media\ Server/Logs
+      - plex-cache:/config/Library/Application\ Support/Plex\ Media\ Server/Cache
+      - plex-metadata:/config/Library/Application\ Support/Plex\ Media\ Server/Metadata
+      - plex-media:/config/Library/Application\ Support/Plex\ Media\ Server/Media
+      - /etc/localtime:/etc/localtime:ro # Sync the container's time to the host's time
+    ports:
+      - 10003:32400
+
+networks:
+  mvr-hl:
+    external: true
+
+volumes:
+  plex-logs:
