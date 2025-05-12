@@ -6,8 +6,6 @@ services:
     networks:
       - mvr-hl
     environment:
-      - PLEX_UID=1000
-      - PLEX_GID=1000
       - TZ=Europe/Zurich
       - HOME=/config
     devices:
