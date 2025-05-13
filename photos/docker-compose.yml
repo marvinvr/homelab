@@ -9,7 +9,7 @@ services:
       - ${DATA_DIR:-/opt/apps}/immich/backups:/usr/src/app/upload/backups
 
       - /mnt/temp/immich/thumbnails:/usr/src/app/upload/thumbnails
-      - /mnt/temp/immich/uploads:/usr/src/app/upload/uploads
+      - /mnt/temp/immich/uploads:/usr/src/app/upload/upload
       - /mnt/temp/immich/encoded-video:/usr/src/app/upload/encoded-video
 
       - /etc/localtime:/etc/localtime:ro
