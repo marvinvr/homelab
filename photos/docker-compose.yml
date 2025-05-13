@@ -7,9 +7,9 @@ services:
       - ${DATA_DIR:-/opt/apps}/immich/profiles:/usr/src/app/upload/profiles
       - ${DATA_DIR:-/opt/apps}/immich/backups:/usr/src/app/upload/backups
 
-      - immich-thumbnails:/usr/src/app/upload/thumbnails
-      - immich-uploads:/usr/src/app/upload/uploads
-      - immich-encoded-video:/usr/src/app/upload/encoded-video
+      - /mnt/temp/immich/thumbnails:/usr/src/app/upload/thumbnails
+      - /mnt/temp/immich/uploads:/usr/src/app/upload/uploads
+      - /mnt/temp/immich/encoded-video:/usr/src/app/upload/encoded-video
 
       - /etc/localtime:/etc/localtime:ro
     ports:
@@ -53,8 +53,3 @@ services:
     command: >-
       postgres -c shared_preload_libraries=vectors.so -c 'search_path="$$user", public, vectors' -c logging_collector=on -c max_wal_size=2GB -c shared_buffers=512MB -c wal_compression=on
     restart: unless-stopped
-
-volumes:
-  immich-thumbnails:
-  immich-uploads:
-  immich-encoded-video:
