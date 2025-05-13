@@ -59,6 +59,42 @@ services:
       - "traefik.http.routers.sonarr-4k.rule=Host(`sonarr-4k.mvr.io`)"
       - "traefik.http.services.sonarr-4k.loadbalancer.server.port=30028"
 
+  radarr-1080p:
+    image: linuxserver/radarr:latest
+    container_name: radarr-1080p
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/radarr-1080p:/config
+      - radarr-1080p-backups:/config/Backups
+      - radarr-1080p-mediacover:/config/MediaCover
+      - /mnt/media/Movies/1080p:/movies
+      - /mnt/temp/sabnzbd/downloads:/downloads
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr-1080p.entrypoints=web"
+      - "traefik.http.routers.radarr-1080p.rule=Host(`radarr-1080p.mvr.io`)"
+      - "traefik.http.services.radarr-1080p.loadbalancer.server.port=30025"
+
+  radarr-4k:
+    image: linuxserver/radarr:latest
+    container_name: radarr-4k
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/radarr-4k:/config
+      - radarr-4k-backups:/config/Backups
+      - radarr-4k-mediacover:/config/MediaCover
+      - /mnt/media/Movies/4k:/movies
+      - /mnt/temp/sabnzbd/downloads:/downloads
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr-4k.entrypoints=web"
+      - "traefik.http.routers.radarr-4k.rule=Host(`radarr-4k.mvr.io`)"
+      - "traefik.http.services.radarr-4k.loadbalancer.server.port=30026"
+
 networks:
   mvr-hl:
     external: true
@@ -72,3 +108,7 @@ volumes:
   sonarr-1080p-mediacover:
   sonarr-4k-backups:
   sonarr-4k-mediacover:
+  radarr-1080p-backups:
+  radarr-1080p-mediacover:
+  radarr-4k-backups:
+  radarr-4k-mediacover:
