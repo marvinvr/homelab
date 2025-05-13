@@ -41,6 +41,24 @@ services:
       - "traefik.http.routers.sonarr-1080p.rule=Host(`sonarr-1080p.mvr.io`)"
       - "traefik.http.services.sonarr-1080p.loadbalancer.server.port=30027"
 
+  sonarr-4k:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr-4k
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/sonarr-4k:/config
+      - sonarr-4k-backups:/config/Backups
+      - sonarr-4k-mediacover:/config/MediaCover
+      - /mnt/media/TV-Shows/4k:/tv
+      - /mnt/temp/sabnzbd/downloads:/downloads
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr-4k.entrypoints=web"
+      - "traefik.http.routers.sonarr-4k.rule=Host(`sonarr-4k.mvr.io`)"
+      - "traefik.http.services.sonarr-4k.loadbalancer.server.port=30028"
+
 networks:
   mvr-hl:
     external: true
@@ -52,3 +70,5 @@ volumes:
   plex-media: 
   sonarr-1080p-backups:
   sonarr-1080p-mediacover:
+  sonarr-4k-backups:
+  sonarr-4k-mediacover:
