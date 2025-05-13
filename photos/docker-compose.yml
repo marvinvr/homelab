@@ -36,7 +36,7 @@ services:
 
   database:
     container_name: immich_postgres
-    image: tensorchord/pgvecto-rs:pg15-v0.2.0@sha256:5524a0e19a59950e766e98d6a36142709c0f423b18eff8a7966ae5fc43561af0
+    image: tensorchord/pgvecto-rs:pg15-v0.2.0
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is not set}
       POSTGRES_USER: ${DB_USERNAME:?DB_USERNAME is not set}
