@@ -4,7 +4,7 @@ services:
     image: ghcr.io/immich-app/immich-server:release
     volumes:
       - /mnt/photos:/usr/src/app/upload/library
-      - ${DATA_DIR:-/opt/apps}/immich/.immich:/usr/src/app/upload/library
+      - ${DATA_DIR:-/opt/apps}/immich/.immich:/usr/src/app/upload/.immich
       - ${DATA_DIR:-/opt/apps}/immich/profiles:/usr/src/app/upload/profiles
       - ${DATA_DIR:-/opt/apps}/immich/backups:/usr/src/app/upload/backups
 
