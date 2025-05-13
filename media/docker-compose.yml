@@ -23,6 +23,24 @@ services:
     ports:
       - 10003:32400
 
+  sonarr-1080p:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr-1080p
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/sonarr-1080p:/config
+      - sonarr-1080p-backups:/config/Backups
+      - sonarr-1080p-mediacover:/config/MediaCover
+      - /mnt/media/TV-Shows/1080p:/tv
+      - /mnt/temp/sabnzbd/downloads:/downloads
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr-1080p.entrypoints=web"
+      - "traefik.http.routers.sonarr-1080p.rule=Host(`sonarr-1080p.mvr.io`)"
+      - "traefik.http.services.sonarr-1080p.loadbalancer.server.port=30027"
+
 networks:
   mvr-hl:
     external: true
@@ -32,3 +50,5 @@ volumes:
   plex-cache:
   plex-metadata:
   plex-media: 
+  sonarr-1080p-backups:
+  sonarr-1080p-mediacover:
