@@ -13,9 +13,10 @@ services:
 
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - '10005:2283'
+      - '10005:30041'
     environment:
       - TZ=Europe/Zurich
+      - DB_HOSTNAME=immich_postgres
       - DB_USERNAME=${DB_USERNAME:?DB_USERNAME is not set}
       - DB_PASSWORD=${DB_PASSWORD:?DB_PASSWORD is not set}
       - DB_DATABASE_NAME=${DB_DATABASE_NAME:?DB_DATABASE_NAME is not set}
@@ -35,7 +36,7 @@ services:
 
   database:
     container_name: immich_postgres
-    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52
+    image: 	tensorchord/pgvecto-rs:pg15-v0.2.0@sha256:5524a0e19a59950e766e98d6a36142709c0f423b18eff8a7966ae5fc43561af0
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is not set}
       POSTGRES_USER: ${DB_USERNAME:?DB_USERNAME is not set}
