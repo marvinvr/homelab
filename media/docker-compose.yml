@@ -95,6 +95,17 @@ services:
       - "traefik.http.routers.radarr-4k.rule=Host(`radarr-4k.mvr.io`)"
       - "traefik.http.services.radarr-4k.loadbalancer.server.port=30026"
 
+  ombi:
+    image: 	lscr.io/linuxserver/ombi:latest
+    container_name: ombi
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/ombi:/config
+    ports:
+      - 10004:3579
+
 networks:
   mvr-hl:
     external: true
