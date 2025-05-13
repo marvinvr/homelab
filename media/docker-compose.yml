@@ -96,7 +96,7 @@ services:
       - "traefik.http.services.radarr-4k.loadbalancer.server.port=30026"
 
   ombi:
-    image: 	lscr.io/linuxserver/ombi:latest
+    image: lscr.io/linuxserver/ombi:latest
     container_name: ombi
     restart: unless-stopped
     networks:
