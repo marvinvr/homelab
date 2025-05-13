@@ -8,7 +8,7 @@ services:
       - ${DATA_DIR:-/opt/apps}/immich/profiles:/usr/src/app/upload/profile
       - ${DATA_DIR:-/opt/apps}/immich/backups:/usr/src/app/upload/backups
 
-      - /mnt/temp/immich/thumbnails:/usr/src/app/upload/thumbnails
+      - /mnt/temp/immich/thumbnails:/usr/src/app/upload/thumbs
       - /mnt/temp/immich/uploads:/usr/src/app/upload/upload
       - /mnt/temp/immich/encoded-video:/usr/src/app/upload/encoded-video
 
