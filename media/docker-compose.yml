@@ -106,6 +106,22 @@ services:
     ports:
       - 10004:3579
 
+  tautulli:
+    image: tautulli/tautulli:latest
+    container_name: tautulli
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/tautulli:/config
+    environment:
+      - TZ=Europe/Zurich
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tautulli.entrypoints=web"
+      - "traefik.http.routers.tautulli.rule=Host(`tautulli.mvr.io`)"
+      - "traefik.http.services.tautulli.loadbalancer.server.port=8181"
+
 networks:
   mvr-hl:
     external: true
