@@ -1,6 +1,6 @@
 services:
   plex:
-    image: plexinc/pms-docker:1.41.6.9685-d301f511a
+    image: plexinc/pms-docker:latest
     container_name: plex
     restart: unless-stopped
     networks:
@@ -9,15 +9,16 @@ services:
       - TZ=Europe/Zurich
       - HOME=/config
     devices:
-      - /dev/dri:/dev/dri
+      - /dev/dri/card0:/dev/dri/card0
+      - /dev/dri/renderD128:/dev/dri/renderD128
     volumes:
       - ${DATA_DIR:-/opt/apps}/plex:/config
       - /mnt/temp/plex:/transcode
       - /mnt/media:/data
-      - plex-logs:/config/Library/Application\ Support/Plex\ Media\ Server/Logs
-      - plex-cache:/config/Library/Application\ Support/Plex\ Media\ Server/Cache
-      - plex-metadata:/config/Library/Application\ Support/Plex\ Media\ Server/Metadata
-      - plex-media:/config/Library/Application\ Support/Plex\ Media\ Server/Media
+      - plex-logs:/config/Library/Application Support/Plex Media Server/Logs
+      - plex-cache:/config/Library/Application Support/Plex Media Server/Cache
+      - plex-metadata:/config/Library/Application Support/Plex Media Server/Metadata
+      - plex-media:/config/Library/Application Support/Plex Media Server/Media
       - /etc/localtime:/etc/localtime:ro # Sync the container's time to the host's time
     ports:
       - 10003:32400
