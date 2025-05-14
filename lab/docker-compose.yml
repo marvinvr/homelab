@@ -129,7 +129,7 @@ services:
       - REPLICAS=${NEBULA_SYNC_REPLICAS}
       - FULL_SYNC=true
       - RUN_GRAVITY=false
-      - CRON=35 * * * *
+      - CRON=*/6 * * * *
   
   truenas-auto-update:
     image: ghcr.io/marvinvr/truenas-auto-update:latest
@@ -141,6 +141,17 @@ services:
       - APPRISE_URLS=${TRUENAS_APPRISE_URLS}
       - CRON_SCHEDULE=0 4 * * *
       - NOTIFY_ON_SUCCESS=false
+
+  ombi:
+    image: lscr.io/linuxserver/ombi:latest
+    container_name: ombi
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/ombi:/config
+    ports:
+      - 10004:3579
 
   #
   # AI
