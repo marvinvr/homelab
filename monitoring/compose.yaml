@@ -113,7 +113,7 @@ services:
       # required: https://github.com/plausible/community-edition/wiki/configuration#required
       - BASE_URL=https://stats.marvinvr.ch
       - SECRET_KEY_BASE=${PLAUSIBLE_SECRET_KEY_BASE:?Plausible secret key base is not set}
-
+      - DISABLE_REGISTRATION=true
 volumes:
   event-logs:
   plausible-tmp:
