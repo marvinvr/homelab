@@ -103,6 +103,7 @@ services:
       - 10005:8000
     volumes:
       - ${DATA_DIR:-/opt/apps}/plausible/data:/var/lib/plausible
+      - plausible-tmp:/tmp/plausible
     ulimits:
       nofile:
         soft: 65535
@@ -115,6 +116,7 @@ services:
 
 volumes:
   event-logs:
+  plausible-tmp:
 
 networks:
   mvr-hl:
