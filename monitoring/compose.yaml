@@ -119,7 +119,7 @@ services:
     image: ghcr.io/bluewave-labs/checkmate:frontend-dist
     restart: always
     environment:
-      UPTIME_APP_API_BASE_URL: "https://check.mvr.bz/api/v1"
+      UPTIME_APP_API_BASE_URL: "https://check-api.mvr.bz/api/v1"
       UPTIME_APP_CLIENT_HOST: "https://check.mvr.bz"
     ports:
       - "10006:80"
