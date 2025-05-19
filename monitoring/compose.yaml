@@ -128,6 +128,7 @@ services:
   checkmate_server:
     image: ghcr.io/bluewave-labs/checkmate:backend-dist
     restart: always
+    hostname: server
     ports:
       - "10007:52345"
     depends_on:
