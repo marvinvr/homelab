@@ -119,7 +119,7 @@ services:
     image: ghcr.io/bluewave-labs/checkmate:frontend-dist
     restart: always
     environment:
-      UPTIME_APP_API_BASE_URL: "https://check-api.mvr.bz/api/v1"
+      UPTIME_APP_API_BASE_URL: "https://check.mvr.bz/api/v1"
       UPTIME_APP_CLIENT_HOST: "https://check.mvr.bz"
     ports:
       - "10006:80"
@@ -159,7 +159,7 @@ services:
       - ${DATA_DIR:-/opt/apps}/checkmate/mongo:/data/db
     command: ["mongod", "--quiet", "--replSet", "rs0", "--bind_ip_all"]
     healthcheck:
-      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongodb:27017'}]}) }" | mongosh --port 27017 --quiet
+      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'checkmate_mongodb:27017'}]}) }" | mongosh --port 27017 --quiet
       interval: 5s
       timeout: 30s
       start_period: 0s
