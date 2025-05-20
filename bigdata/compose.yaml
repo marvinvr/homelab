@@ -1,6 +1,6 @@
 services:
   registry:
-    image: distribution:3
+    image: registry:3
     ports:
       - "10006:5000"
     volumes:
