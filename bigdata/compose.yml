@@ -1,0 +1,9 @@
+services:
+  registry:
+    image: distribution:3
+    ports:
+      - "10006:5000"
+    volumes:
+      - /mnt/registry:/var/lib/registry
+    environment:
+      - REGISTRY_HTTP_ADDR=0.0.0.0:5000
