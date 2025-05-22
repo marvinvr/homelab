@@ -29,6 +29,10 @@ services:
     restart: unless-stopped
     networks:
       - mvr-hl
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
     volumes:
       - ${DATA_DIR:-/opt/apps}/sonarr-1080p:/config
       - sonarr-1080p-backups:/config/Backups
@@ -53,6 +57,10 @@ services:
       - sonarr-4k-mediacover:/config/MediaCover
       - /mnt/media/TV-Shows/4k:/tv
       - /mnt/temp/sabnzbd/downloads:/downloads
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr-4k.entrypoints=web"
@@ -65,6 +73,10 @@ services:
     restart: unless-stopped
     networks:
       - mvr-hl
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
     volumes:
       - ${DATA_DIR:-/opt/apps}/radarr-1080p:/config
       - radarr-1080p-backups:/config/Backups
@@ -83,6 +95,10 @@ services:
     restart: unless-stopped
     networks:
       - mvr-hl
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
     volumes:
       - ${DATA_DIR:-/opt/apps}/radarr-4k:/config
       - radarr-4k-backups:/config/Backups
