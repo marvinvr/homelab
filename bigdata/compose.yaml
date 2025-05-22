@@ -3,6 +3,7 @@ services:
     image: registry:3
     ports:
       - "10006:5000"
+    restart: unless-stopped
     volumes:
       - /mnt/registry:/var/lib/registry
     environment:
