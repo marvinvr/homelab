@@ -162,6 +162,35 @@ services:
     ports:
       - 10004:3579
 
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=Europe/Zurich
+      - PORT=5055 #optional
+    ports:
+      - 10007:5055
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/jellyseerr:/app/config
+
+  homarr:
+    container_name: homarr
+    image: ghcr.io/homarr-labs/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/homarr:/appdata
+    environment:
+      - SECRET_ENCRYPTION_KEY=${SECRET_ENCRYPTION_KEY:?SECRET_ENCRYPTION_KEY is not set}
+    networks:
+      - mvr-hl
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homarr.entrypoints=web"
+      - "traefik.http.routers.homarr.rule=Host(`dash.mvr.io`)"
+      - "traefik.http.services.homarr.loadbalancer.server.port=7575"
+
   #
   # AI
   #
