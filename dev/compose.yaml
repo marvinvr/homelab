@@ -1,0 +1,26 @@
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PROXY_DOMAIN=code.mvr.io
+      - DEFAULT_WORKSPACE=/config/workspace #optional
+      - PWA_APPNAME=code-server #optional
+    volumes:
+      - /opt/apps/code-server:/confi
+      - /home/mvr/Development:/Development
+    networks:
+      - mvr-hl
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.myspeed.entrypoints=web"
+      - "traefik.http.routers.myspeed.rule=Host(`code.mvr.io`)"
+      - "traefik.http.services.myspeed.loadbalancer.server.port=8443"
+    restart: unless-stopped
+
+networks:
+  mvr-hl:
+    external: true
