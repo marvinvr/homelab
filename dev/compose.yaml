@@ -12,6 +12,7 @@ services:
     volumes:
       - /opt/apps/code-server:/config
       - /home/mvr/Development:/Development
+      - /home/mvr/.ssh:/home/abc/.ssh:ro
     networks:
       - mvr-hl
     labels:
