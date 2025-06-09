@@ -138,7 +138,7 @@ services:
       - SYNC_GRAVITY_DOMAIN_LIST=true
       - SYNC_GRAVITY_CLIENT=true
       - RUN_GRAVITY=true
-      - CRON=*/6 * * * *
+      - CRON=20,50 * * * *
   
   truenas-auto-update:
     image: ghcr.io/marvinvr/truenas-auto-update:latest
