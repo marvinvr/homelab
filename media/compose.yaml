@@ -9,7 +9,7 @@ services:
       - TZ=Europe/Zurich
       - HOME=/config
     devices:
-      - /dev/dri/card0:/dev/dri/card0
+      - /dev/dri/card1:/dev/dri/card1
       - /dev/dri/renderD128:/dev/dri/renderD128
     volumes:
       - ${DATA_DIR:-/opt/apps}/plex:/config
