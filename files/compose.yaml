@@ -15,7 +15,7 @@ services:
       - ${DATA_DIR:-/opt/apps}/paperless/data:/usr/src/paperless/data
       - /mnt/docs:/usr/src/paperless/media
       - ${DATA_DIR:-/opt/apps}/paperless/export:/usr/src/paperless/export
-      - consume:/usr/src/paperless/consume
+      - ${DATA_DIR:-/opt/apps}/paperless/consume:/usr/src/paperless/consume
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       USERMAP_UID: 1000
@@ -37,5 +37,4 @@ networks:
   mvr-hl:
     external: true
 volumes:
-  consume:
   redisdata:
