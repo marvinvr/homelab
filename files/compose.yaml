@@ -1,0 +1,34 @@
+services:
+  broker:
+    image: docker.io/library/redis:8
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+      - broker
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/paperless/data:/usr/src/paperless/data
+      - /mnt/docs:/usr/src/paperless/media
+      - ${DATA_DIR:-/opt/apps}/paperless/export:/usr/src/paperless/export
+      - consume:/usr/src/paperless/consume
+    env_file: docker-compose.env
+    environment:
+      PAPERLESS_REDIS: redis://broker:6379
+      USERMAP_UID: 1000
+      USERMAP_GID: 1000
+      PAPERLESS_URL: http://docs.mvr.io
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY:?PAPERLESS_SECRET_KEY is not set}
+      PAPERLESS_TIME_ZONE: Europe/Zurich
+      PAPERLESS_OCR_LANGUAGE: deu
+      PAPERLESS_OCR_LANGUAGES: deu eng
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.paperless.entrypoints=web"
+      - "traefik.http.routers.paperless.rule=Host(`docs.mvr.io`)"
+      - "traefik.http.services.paperless.loadbalancer.server.port=8000"
+volumes:
+  consume:
+  redisdata:
