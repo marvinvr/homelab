@@ -14,7 +14,6 @@ services:
       - /mnt/docs:/usr/src/paperless/media
       - ${DATA_DIR:-/opt/apps}/paperless/export:/usr/src/paperless/export
       - consume:/usr/src/paperless/consume
-    env_file: docker-compose.env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       USERMAP_UID: 1000
