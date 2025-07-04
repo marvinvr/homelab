@@ -23,8 +23,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.immich.entrypoints=web"
       - "traefik.http.routers.immich.rule=Host(`photos.mvr.io`)"
-      - "traefik.http.routers.immich.service=immich-server"
-      - "traefik.http.services.immich-server.loadbalancer.server.port=2283"
+      - "traefik.http.services.immich.loadbalancer.server.port=2283"
     depends_on:
       - redis
       - database
