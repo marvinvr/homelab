@@ -13,14 +13,18 @@ services:
       - /mnt/temp/immich/encoded-video:/usr/src/app/upload/encoded-video
 
       - /etc/localtime:/etc/localtime:ro
-    ports:
-      - '10005:2283'
     environment:
       - TZ=Europe/Zurich
       - DB_HOSTNAME=immich_postgres
       - DB_USERNAME=${DB_USERNAME:?DB_USERNAME is not set}
       - DB_PASSWORD=${DB_PASSWORD:?DB_PASSWORD is not set}
       - DB_DATABASE_NAME=${DB_DATABASE_NAME:?DB_DATABASE_NAME is not set}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.immich.entrypoints=web"
+      - "traefik.http.routers.immich.rule=Host(`photos.mvr.io`)"
+      - "traefik.http.routers.immich.service=immich-server"
+      - "traefik.http.services.immich-server.loadbalancer.server.port=2283"
     depends_on:
       - redis
       - database
