@@ -27,8 +27,8 @@ services:
     depends_on:
       - redis
       - database
-    ports:
-      - '10005:2283'
+    networks:
+      - mvr-hl
     restart: unless-stopped
     healthcheck:
       disable: false
