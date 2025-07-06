@@ -44,9 +44,9 @@ services:
     volumes:
       - ${DATA_DIR:-/opt/apps}/nextcloud/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${NEXTCLOUD_DB:?NEXTCLOUD_DB is not set}
-      - POSTGRES_USER=${NEXTCLOUD_USER:?NEXTCLOUD_USER is not set}
-      - POSTGRES_PASSWORD=${NEXTCLOUD_PASSWORD:?NEXTCLOUD_PASSWORD is not set}
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - NEXTCLOUD_POSTGRES_PASSWORD=${NEXTCLOUD_POSTGRES_PASSWORD:?NEXTCLOUD_POSTGRES_PASSWORD is not set}
 
   # Note: Redis is an external service. You can find more information about the configuration here:
   # https://hub.docker.com/_/redis
@@ -69,8 +69,8 @@ services:
       - /mnt/files:/var/www/html/data
     environment:
       - POSTGRES_HOST=nextcloud-db
-      - POSTGRES_DB=${NEXTCLOUD_DB:?NEXTCLOUD_DB is not set}
-      - POSTGRES_USER=${NEXTCLOUD_USER:?NEXTCLOUD_USER is not set}
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
       - POSTGRES_PASSWORD=${NEXTCLOUD_PASSWORD:?NEXTCLOUD_PASSWORD is not set}
       - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD:?NEXTCLOUD_ADMIN_PASSWORD is not set}
       - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_ADMIN_USER:?NEXTCLOUD_ADMIN_USER is not set}
