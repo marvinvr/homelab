@@ -61,7 +61,7 @@ services:
     image: nextcloud
     restart: always
     ports:
-      - 8080:80
+      - 8089:80
     networks:
       - mvr-hl
     volumes:
