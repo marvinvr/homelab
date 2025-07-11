@@ -212,6 +212,20 @@ services:
       - traefik.http.routers.flaresolverr.rule=Host(`flaresolverr.mvr.io`)
       - traefik.http.services.flaresolverr.loadbalancer.server.port=8080
 
+  ladder:
+    image: ghcr.io/everywall/ladder:latest
+    container_name: ladder
+    restart: unless-stopped
+    environment:
+      - RULESET=https://t.ly/14PSf
+    networks:
+      - mvr-hl
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ladder.entrypoints=web"
+      - "traefik.http.routers.ladder.rule=Host(`crack.mvr.io`)"
+      - "traefik.http.services.ladder.loadbalancer.server.port=8080"
+
   #
   # AI
   #
