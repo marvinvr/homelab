@@ -235,6 +235,8 @@ services:
       - mvr-hl
     volumes:
       - ${DATA_DIR:-/opt/apps}/open-webui:/app/backend/data
+    environment:
+      - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=Remote-Email
     ports:
       - 10001:8080
 
