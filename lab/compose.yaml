@@ -224,6 +224,20 @@ services:
       - "traefik.http.routers.omni-tools.rule=Host(`tools.mvr.io`)"
       - "traefik.http.services.omni-tools.loadbalancer.server.port=80"
 
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    networks:
+      - mvr-hl
+    volumes:
+      - ${DATA_DIR:-/opt/apps}/n8n:/home/node/.n8n
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.n8n.entrypoints=web"
+      - "traefik.http.routers.n8n.rule=Host(`n8n.mvr.io`)"
+      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+
   #
   # AI
   #
