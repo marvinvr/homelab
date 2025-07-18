@@ -232,6 +232,8 @@ services:
       - mvr-hl
     volumes:
       - ${DATA_DIR:-/opt/apps}/n8n:/home/node/.n8n
+    environment:
+      - N8N_SECURE_COOKIE=false
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.n8n.entrypoints=web"
